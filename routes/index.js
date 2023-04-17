@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 
 const productsRouter = require('./products.router');
 const categoriesRouter = require('./categories.router');
@@ -11,11 +12,11 @@ function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router);
   router.use('/products', productsRouter);
-  router.use('/categories', categoriesRouter);
-  router.use('/users', usersRouter);
-  router.use('/orders', orderRouter);
-  router.use('/customers', customersRouter);
-  router.use('/auth', authRouter);
+  router.use('/categories',passport.authenticate('jwt', {session: false}), categoriesRouter);
+  router.use('/users',passport.authenticate('jwt', {session: false}), usersRouter);
+  router.use('/orders',passport.authenticate('jwt', {session: false}), orderRouter);
+  router.use('/customers',passport.authenticate('jwt', {session: false}), customersRouter);
+  router.use('/auth',passport.authenticate('jwt', {session: false}), authRouter);
 }
 
 module.exports = routerApi;

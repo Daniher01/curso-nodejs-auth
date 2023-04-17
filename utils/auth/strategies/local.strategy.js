@@ -6,6 +6,7 @@ const UserService =  require('../../../services/user.service');
 const service = new UserService();
 
 const LocalStrategy = new Strategy({
+  // ? se cambiar el formato de los atributos: username -> email
   usernameField: 'email',
   passwordField: 'password'
 },
