@@ -7,6 +7,7 @@ const usersRouter = require('./users.router');
 const orderRouter = require('./orders.router');
 const customersRouter = require('./customers.router');
 const authRouter = require('./auth.router');
+const profileRouter = require('./profile.router');
 
 function routerApi(app) {
   const router = express.Router();
@@ -16,7 +17,8 @@ function routerApi(app) {
   router.use('/users',passport.authenticate('jwt', {session: false}), usersRouter);
   router.use('/orders',passport.authenticate('jwt', {session: false}), orderRouter);
   router.use('/customers',passport.authenticate('jwt', {session: false}), customersRouter);
-  router.use('/auth',passport.authenticate('jwt', {session: false}), authRouter);
+  router.use('/auth', authRouter);
+  router.use('/profile', profileRouter);
 }
 
 module.exports = routerApi;
